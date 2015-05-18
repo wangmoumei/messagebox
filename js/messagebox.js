@@ -1,60 +1,77 @@
-function alertbox(str){
+(function(){
+	var d = document,w = window,m;
+	w.alertbox = function(str){
 		addscreen();
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
-		document.getElementById('MessageContent').innerHTML = str;
-		document.getElementById('Mes-Btn').innerHTML = '<a id="Exit">确定</a>';
-		document.getElementById('Exit').onclick = function(){
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('MessageContent').innerHTML = str;
+		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">确定</a>';
+		d.getElementById('Exit').onclick = function(){
+			removescreen();
 		}
 	}
-	function messagebox(str){
+	 w.messagebox = function(str){
 		addscreen();
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
-		document.getElementById('MessageContent').innerHTML = str;
-		document.getElementById('Mes-Btn').innerHTML = '<a id="Exit">我知道了</a>';
-		document.getElementById('Exit').onclick = function(){
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('MessageContent').innerHTML = str;
+		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">我知道了</a>';
+		d.getElementById('Exit').onclick = function(){
+			removescreen();
 		}
 	}
-	function confirmbox(str,fun){
+	 w.confirmbox = function(str,fun){
 		addscreen();
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
-		document.getElementById('MessageContent').innerHTML = str;
-		document.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">确定</a>';
-		document.getElementById('Exit').onclick = function(){
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('MessageContent').innerHTML = str;
+		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">确定</a>';
+		d.getElementById('Exit').onclick = function(){
+			removescreen();
 		}
-		document.getElementById('Ensure').onclick = function(){
-			fun();
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('Ensure').onclick = function(){
+			m.className = "hideMes";
+			setTimeout(function(){
+				m.style.display = "none";
+				fun();
+			},600);
 		}
 	}
-	function promptbox(str,fun){
+	w.promptbox = function(str,fun){
 		addscreen();
-		document.getElementById('MessageContent').innerHTML = '<textarea id="variable" class="Mes-Fill" placeholder="'+str+'"/>';
-		document.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">提交</a>';
-		document.getElementById('Exit').onclick = function(){
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('MessageContent').innerHTML = '<textarea id="variable" class="Mes-Fill" placeholder="'+str+'"/>';
+		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">提交</a>';
+		d.getElementById('Exit').onclick = function(){
+			removescreen();
 		}
-		document.getElementById('Ensure').onclick = function(){
-			var variable = document.getElementById('variable').value;
-			fun(variable);
-			document.body.removeChild(document.getElementById('ScreenCover'));
+		d.getElementById('Ensure').onclick = function(){
+			var variable = d.getElementById('variable').value;
+			m.className = "hideMes";
+			setTimeout(function(){
+				m.style.display = "none";
+				fun(variable);
+			},600);
 		}
 	}
 	function addscreen(){
-		if(document.getElementById('ScreenCover'))
-			document.body.removeChild(document.getElementById('ScreenCover'));
-		var screen_cover = document.createElement("div");
-		screen_cover.id = 'ScreenCover';
-		document.body.appendChild(screen_cover);
-		var screen_height = document.documentElement.clientHeight;
-		var screen_width = document.documentElement.clientWidth;
-		screen_cover.style.height = screen_height+'px';
-		screen_cover.innerHTML = '<div id="MessageBox"><div id="MessageContent"></div><div id="Mes-Btn"></div></div>';
-		var MessageBox = document.getElementById('MessageBox');
-		var box_width = MessageBox.clientWidth;
-		var box_height = MessageBox.clientHeight;
-		MessageBox.style.left =( screen_width - box_width ) / 2 + 'px';
-		MessageBox.style.top =( screen_height - box_height ) / 2  + 'px';
+		if(m){
+			m.className = 'showMes';
+			m.style.display="block";
+			return;
+		}
+		m = d.createElement("div");
+		m.id = 'ScreenCover';
+		m.className = 'showMes';
+		d.body.appendChild(m);
+		var screen_height = d.documentElement.clientHeight;
+		var screen_width = d.documentElement.clientWidth;
+		m.style.height = screen_height+'px';
+		m.innerHTML = '<div id="MessageBox"><div id="MessageContent"></div><div id="Mes-Btn"></div></div>';
+		var b = d.getElementById('MessageBox');
+		var bw = b.clientWidth;
+		var bh = b.clientHeight;
+		b.style.left =( screen_width - bw ) / 2 + 'px';
+		b.style.top =( screen_height - bh ) / 2  + 'px';
 	}
+	function removescreen(){
+		m.className = "hideMes";
+		setTimeout(function(){m.style.display = "none";},600);
+	}
+})()
