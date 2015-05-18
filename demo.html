@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>messagebox demo</title>
+<link rel="stylesheet" href="css/messagebox.css">
+<script type="text/javascript" src="js/messagebox.js"></script>
+</head>
+
+<body>
+<button id="alertbox">alertbox</button>
+<button id="messagebox">messagebox</button>
+<button id="confirmbox">confirmbox</button>
+<button id="promptbox">promptbox</button>
+<script type="text/javascript">
+document.getElementById('alertbox').onclick = function(){alertbox("这是alertbox");}
+
+document.getElementById('messagebox').onclick = function(){messagebox("这是messagebox");}
+
+document.getElementById('confirmbox').onclick = function(){
+	confirmbox("这是confirmbox",function(){
+		alert("点击确定，激活事件");
+	});
+}
+
+document.getElementById('promptbox').onclick = function(){
+	promptbox("placeholder内容",function(aaa){
+		alert(aaa);
+	});
+}
+</script>
+</body>
+</html>
