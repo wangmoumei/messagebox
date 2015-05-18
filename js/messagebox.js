@@ -5,27 +5,21 @@
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
 		d.getElementById('MessageContent').innerHTML = str;
 		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">确定</a>';
-		d.getElementById('Exit').onclick = function(){
-			removescreen();
-		}
+		bind();
 	}
 	 w.messagebox = function(str){
 		addscreen();
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
 		d.getElementById('MessageContent').innerHTML = str;
 		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">我知道了</a>';
-		d.getElementById('Exit').onclick = function(){
-			removescreen();
-		}
+		bind();
 	}
 	 w.confirmbox = function(str,fun){
 		addscreen();
 		if(str.length < 20) str = '<p style="margin:0;padding:10px 0">'+str+'</p>'; 
 		d.getElementById('MessageContent').innerHTML = str;
 		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">确定</a>';
-		d.getElementById('Exit').onclick = function(){
-			removescreen();
-		}
+		bind();
 		d.getElementById('Ensure').onclick = function(){
 			m.className = "hideMes";
 			setTimeout(function(){
@@ -38,9 +32,7 @@
 		addscreen();
 		d.getElementById('MessageContent').innerHTML = '<textarea id="variable" class="Mes-Fill" placeholder="'+str+'"/>';
 		d.getElementById('Mes-Btn').innerHTML = '<a id="Exit">取消</a><a id="Ensure">提交</a>';
-		d.getElementById('Exit').onclick = function(){
-			removescreen();
-		}
+		bind();
 		d.getElementById('Ensure').onclick = function(){
 			var variable = d.getElementById('variable').value;
 			m.className = "hideMes";
@@ -70,8 +62,10 @@
 		b.style.left =( screen_width - bw ) / 2 + 'px';
 		b.style.top =( screen_height - bh ) / 2  + 'px';
 	}
-	function removescreen(){
-		m.className = "hideMes";
-		setTimeout(function(){m.style.display = "none";},600);
+	function bind(){
+		d.getElementById('Exit').onclick = function(){
+			m.className = "hideMes";
+			setTimeout(function(){m.style.display = "none";},600);
+		}
 	}
 })()

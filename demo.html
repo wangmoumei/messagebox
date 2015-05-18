@@ -6,16 +6,30 @@
 <title>messagebox demo</title>
 <link rel="stylesheet" href="css/messagebox.css">
 <script type="text/javascript" src="js/messagebox.js"></script>
+<style>
+div{
+	font-size:12px;
+	word-break:break-all;	
+}
+</style>
 </head>
 
 <body>
 <button id="alertbox">alertbox</button>
+<div>alertbox("这是alertbox");</div>
 <br/><br/>
 <button id="messagebox">messagebox</button>
+<div>messagebox("这是messagebox");</div>
 <br/><br/>
 <button id="confirmbox">confirmbox</button>
+<div>confirmbox("这是confirmbox",function(){
+<div>alertbox("点击确定，激活事件");<div>
+});</div>
 <br/><br/>
 <button id="promptbox">promptbox</button>
+<div>promptbox("placeholder内容",function(str){
+	<div>alertbox(str);</div>
+});</div>
 <script type="text/javascript">
 document.getElementById('alertbox').onclick = function(){alertbox("这是alertbox");}
 
@@ -28,8 +42,8 @@ document.getElementById('confirmbox').onclick = function(){
 }
 
 document.getElementById('promptbox').onclick = function(){
-	promptbox("placeholder内容",function(aaa){
-		alertbox(aaa);
+	promptbox("placeholder内容",function(str){
+		alertbox(str);
 	});
 }
 </script>
