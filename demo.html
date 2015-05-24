@@ -30,6 +30,8 @@ div{
 <div>promptbox("placeholder内容",function(str){
 	<div>alertbox(str);</div>
 });</div>
+<br/><br/>
+<button id="noticebox">noticebox</button>
 <script type="text/javascript">
 document.getElementById('alertbox').onclick = function(){alertbox("这是alertbox");}
 
@@ -45,6 +47,9 @@ document.getElementById('promptbox').onclick = function(){
 	promptbox("placeholder内容",function(str){
 		alertbox(str);
 	});
+}
+document.getElementById('noticebox').onclick = function(){
+	noticebox("<span style='color:#bec3c7'>某某人</span>上线了");	
 }
 </script>
 </body>
