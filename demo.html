@@ -16,7 +16,9 @@ div{
 
 <body>
 <button id="alertbox">alertbox</button>
-<div>alertbox("这是alertbox");</div>
+<div>alertbox("这是alertbox",function(){<br/>
+	messagebox("后面可以加函数，也可以不加");<br/>
+});</div>
 <br/><br/>
 <button id="messagebox">messagebox</button>
 <div>messagebox("这是messagebox");</div>
@@ -32,8 +34,36 @@ div{
 });</div>
 <br/><br/>
 <button id="noticebox">noticebox</button>
+<pre>
+noticebox("<span style='color:#bec3c7'>某某人</span>上线了");	
+
+</pre>
+<br/><br/>
+<button id="loadingbox">loadingbox</button>
+<pre>loadingbox("提交中...",function(obj){
+		setTimeout(function(){
+			obj.broken("3秒后自动跳转",function(){
+				//点击事件
+				obj.hide();
+				messagebox("现在跳转");	
+			});
+			var n = 3,
+			timer = setInterval(function(){
+				n--;
+				obj.text(n+"秒后自动跳转");
+				if(n==0){
+					clearInterval(timer);
+					obj.hide();
+				}	
+			},1000)
+		},1600);
+	});</pre>
+
+<br/><br/>
 <script type="text/javascript">
-document.getElementById('alertbox').onclick = function(){alertbox("这是alertbox");}
+document.getElementById('alertbox').onclick = function(){alertbox("这是alertbox",function(){
+	messagebox("后面可以加函数，也可以不加");
+});}
 
 document.getElementById('messagebox').onclick = function(){messagebox("这是messagebox");}
 
@@ -50,6 +80,26 @@ document.getElementById('promptbox').onclick = function(){
 }
 document.getElementById('noticebox').onclick = function(){
 	noticebox("<span style='color:#bec3c7'>某某人</span>上线了");	
+}
+document.getElementById("loadingbox").onclick = function(){
+	loadingbox("提交中...",function(obj){
+		setTimeout(function(){
+			obj.broken("3秒后自动跳转",function(){
+				//点击事件
+				obj.hide();
+				messagebox("现在跳转");	
+			});
+			var n = 3,
+			timer = setInterval(function(){
+				n--;
+				obj.text(n+"秒后自动跳转");
+				if(n==0){
+					clearInterval(timer);
+					obj.hide();
+				}	
+			},1000)
+		},1600);
+	});
 }
 </script>
 </body>
