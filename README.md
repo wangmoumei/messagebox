@@ -8,3 +8,5 @@
 <p>这次修改内容：</p>
 <p>css:做了box/flex兼容性处理，加了animation</p>
 <p>js:压缩</p>
+<p>01.05 修改内容：</p>
+<p><a target="_blank" href="http://wangmoumei.github.io/messagebox.html">demo</a>优化</p>
